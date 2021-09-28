@@ -69,15 +69,16 @@ $ sudo nano /home/adm_ecm/ecosystem.config.js
 
 # Add the following entry under 'apps', replacing PORTNUMBER with a available port
 {
-  name: 'YOURAPPNAME',
-  exec_mode: 'cluster',
-  instances: 'max',
-  script: 'YOURAPPNAME/node_modules/nuxt/bin/nuxt.js',
-  args: 'start'
-}
+    name: 'YOURAPPNAME',
+    exec_mode: 'cluster',
+    instances: 'max',
+    cwd: 'YOURAPPNAME',
+    script: './node_modules/nuxt/bin/nuxt.js',
+    args: 'start'
+  }
 
-# Restart PM2 and all Nuxt.js instances with it
-$ sudo pm2 restart all
+# Start Nuxt.js server
+$ pm2 start
 ```
 
 The app should now be available under https://able-customapps.westeurope.cloudapp.azure.com/able-YOURAPPNAME and can be used with d.3
