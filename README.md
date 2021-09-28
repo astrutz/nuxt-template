@@ -15,7 +15,7 @@ To follow this tutorial replace '_YOURAPPNAME_' with the name of your new app an
 $ cd YOURAPPNAME
 
 # change the repository origin
-$ git remote add origin https://github.com/YOURUSERNAME/YOURAPPNAME.git
+$ git remote set-url origin https://github.com/astrutz/resubmission.git
 
 # push to your new remote origin
 $ git push -u origin master
