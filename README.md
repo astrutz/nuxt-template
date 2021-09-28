@@ -54,6 +54,12 @@ location /able-YOURAPPNAME/ {
 
 # Restart the server, be aware of short inavailabilities
 $ sudo systemctl restart nginx
+
+# Open project folder
+$ cd /home/adm_ecm/YOURAPPNAME
+
+# Install npm dependencies
+$ sudo npm i
 	
 # Open PM2 configuration
 $ sudo nano /home/adm_ecm/ecosystem.config.js
@@ -63,7 +69,7 @@ $ sudo nano /home/adm_ecm/ecosystem.config.js
   name: 'YOURAPPNAME',
   exec_mode: 'cluster',
   instances: 'max',
-  script: './node_modules/nuxt/bin/nuxt.js',
+  script: 'YOURAPPNAME/node_modules/nuxt/bin/nuxt.js',
   args: 'start'
 }
 
