@@ -14,9 +14,6 @@ To follow this tutorial replace '_YOURAPPNAME_' with the name of your new app an
 # open your project
 $ cd YOURAPPNAME
 
-# serve with hot reload at localhost:3000
-$ npm run dev
-
 # change the repository origin
 $ git remote add origin https://github.com/YOURUSERNAME/YOURAPPNAME.git
 
