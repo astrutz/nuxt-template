@@ -60,6 +60,9 @@ $ cd /home/adm_ecm/YOURAPPNAME
 
 # Install npm dependencies
 $ sudo npm i
+
+# Build server
+$ sudo nuxt build
 	
 # Open PM2 configuration
 $ sudo nano /home/adm_ecm/ecosystem.config.js
