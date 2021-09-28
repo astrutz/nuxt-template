@@ -53,6 +53,9 @@ location /able-YOURAPPNAME/ {
     proxy_set_header Host $host;
     proxy_cache_bypass $http_upgrade;
 }
+
+# Restart the server, be aware of short inavailabilities
+$ sudo systemctl restart nginx
 	
 # Open PM2 configuration
 $ sudo nano /home/adm_ecm/ecosystem.config.js
