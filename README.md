@@ -6,6 +6,7 @@
 
 To follow this tutorial replace '_YOURAPPNAME_' with the name of your new app and '_YOURUSERNAME_' with your GitHub username.
 
+* Create a repository called '_YOURAPPNAME_'
 * Clone this repository
 * Find and replace 'able-nuxt-template' with your appname, e.g. 'able-_YOURAPPNAME_'
 * Rename the folder 'nuxt-template' to '_YOURAPPNAME_'
@@ -21,7 +22,7 @@ $ git remote set-url origin https://github.com/YOURUSERNAME/YOURAPPNAME.git
 $ git push -u origin master
 ```
 
-* Transfer ownership to user `ecm-cc`, credentials can be found in Keepass#
+* Transfer ownership of your repository to user `ecm-cc`, credentials can be found in Keepass
 * Connect to the Azure VM via WinSCP, credentials can be found in Keepass
 * Create a new folder under `/home/adm_ecm` named _YOURAPPNAME_
 * Copy the whole content of your local `/YOURAPPNAME` to the remote folder `/YOURAPPNAME`
