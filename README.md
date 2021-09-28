@@ -1,23 +1,91 @@
-# nuxt-template
+# ABLE Nuxt.js Template
 
-## Build Setup
+## Usage
+
+### Initial Setup
+
+To follow this tutorial replace '_YOURAPPNAME_' with the name of your new app and '_YOURUSERNAME_' with your GitHub username.
+
+* Clone this repository
+* Find and replace 'able-nuxt-template' with your appname, e.g. 'able-_YOURAPPNAME_'
+* Rename the folder 'nuxt-template' to '_YOURAPPNAME_'
 
 ```bash
-# install dependencies
-$ npm install
+# open your project
+$ cd YOURAPPNAME
 
 # serve with hot reload at localhost:3000
 $ npm run dev
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+# change the repository origin
+$ git remote add origin https://github.com/YOURUSERNAME/YOURAPPNAME.git
 
-# generate static project
-$ npm run generate
+# push to your new remote origin
+$ git push -u origin master
 ```
 
+* Transfer ownership to user `ecm-cc`, credentials can be found in Keepass#
+* Connect to the Azure VM via WinSCP, credentials can be found in Keepass
+* Create a new folder under `/home/adm_ecm` named _YOURAPPNAME_
+* Copy the whole content of your local `/YOURAPPNAME` to the remote folder `/YOURAPPNAME`
+* Connect to the Azure VM via SSH, credentials can be found in Keepass
+
+```bash
+# Open Nuxt.js configuration
+$ sudo nano /home/adm_ecm/YOURAPPNAME/nuxt.config.js
+
+# Add the following entry, replacing PORTNUMBER with a available port
+server: {
+    port: PORTNUMBER,
+}
+
+# Open NGINX proxy configuration
+$ sudo nano /etc/nginx/sites-enabled/default
+
+# Add the following lines as a new entry to both server entries with your chosen port
+
+location /able-YOURAPPNAME/ {
+    #try_files $uri $uri/ =404;
+    proxy_pass http://127.0.0.1:PORTNUMBER;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+}
+	
+# Open PM2 configuration
+$ sudo nano /home/adm_ecm/ecosystem.config.js
+
+# Add the following entry under 'apps', replacing PORTNUMBER with a available port
+{
+  name: 'YOURAPPNAME',
+  exec_mode: 'cluster',
+  instances: 'max',
+  script: './node_modules/nuxt/bin/nuxt.js',
+  args: 'start'
+}
+
+# Restart PM2 and all Nuxt.js instances with it
+$ sudo pm2 restart all
+```
+
+The app should now be available under https://able-customapps.westeurope.cloudapp.azure.com/able-YOURAPPNAME and can be used with d.3
+
+### Build/Deploy Setup
+To build and deploy the app, a build script (credentials included) can be found in the KeePass entry 'Azure/Linux VM Deployment'.
+
+* Open the KeePass entry
+* Create a file `.passwd` and copy the entry
+* Replace YOURAPPNAME with the name of your app
+* **Make sure `.passwd` is included in your .gitignore, as it should by default**
+* To build and deploy just copy the command in your terminal and run it
+
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+
+### Changing server middleware
+
+If the server middleware is changed, the corresponding files need to be transfered "by hand" via WinSCP onto the machine.
 
 ## Special Directories
 
@@ -61,9 +129,3 @@ This directory contains your static files. Each file inside this directory is ma
 Example: `/static/robots.txt` is mapped as `/robots.txt`.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
