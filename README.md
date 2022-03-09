@@ -81,7 +81,7 @@ $ sudo nano /home/adm_ecm/ecosystem.config.js
 $ pm2 start
 ```
 
-The app should now be available under https://able-customapps.westeurope.cloudapp.azure.com/able-YOURAPPNAME and can be used with d.3
+The app should now be available under https://ecm-apps-dev.able-group.de/able-YOURAPPNAME and can be used with d.3
 
 ### Build/Deploy Setup
 To build and deploy the app, a build script (credentials included) can be found in the KeePass entry 'Azure/Linux VM Deployment'.
